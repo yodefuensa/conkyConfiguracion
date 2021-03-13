@@ -1,0 +1,48 @@
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    border_width = 6,
+    --default_color = '#FFFFEC',
+    default_color = '#F1F1F2',
+    color1 = '#F1F1F2',
+    double_buffer = true,
+    draw_borders = false,
+    draw_outline = false, -- amplifies text if yes
+    draw_shades = false,
+    font = 'Ubuntu Mono:normal:size=9',
+    gap_x = 10,
+    gap_y = 650,
+    maximum_width  = 450,
+    minimum_width  = 450,
+    no_buffers = true,
+
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 255,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    draw_blended = false,
+
+    stippled_borders = 2,
+    update_interval = 1.0,
+    uppercase = false, -- set to yes if you want all text to be in uppercase
+    use_spacer = 'right',
+    use_xft = true,
+}
+
+conky.text = [[
+
+${voffset 2}${color1}${font :size=8:bold}HDD INFO ${hr 1}${font}
+${color1}DISKS AND PARTITIONS ${stippled_hr 1 1}
+${color1}Name, Size, Type, Mountpoint 
+${color3}${execi 6000 lsblk | egrep 'disk|part' | awk '{print "- " $1 ", " $4 ", " $6 ", " $7}'}
+# DISK USAGE STATS
+${voffset 2}${color1}DISK USAGE STATS ${stippled_hr 1 1}
+${color1}Used: ${color3}${fs_used /}${color1}${goto 200}Free:${goto 250}${color3}${fs_free /}
+${color2}${fs_bar /}
+${color1}Read: ${color3}${diskio_read}${goto 200}${color1}Write:${goto 250}${color3}${diskio_write}
+${color2}${diskiograph_read 20,130} ${alignr}${diskiograph_write 20,130}
+
+]];
+

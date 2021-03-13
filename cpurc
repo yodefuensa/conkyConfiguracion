@@ -1,0 +1,51 @@
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    border_width = 6,
+    default_color = '#F1F1F2',
+    color1 = '#F1F1F2',
+    color2 = '#E80808',
+    color3 = '#00d52a',
+    color4 = '#eee100',
+    double_buffer = true,
+    draw_borders = false,
+    draw_outline = false, -- amplifies text if yes
+    draw_shades = false,
+    font = 'Ubuntu Mono:normal:size=9',
+    gap_x = 10,
+    gap_y = 115,
+    maximum_width  = 450,
+    minimum_width  = 450,
+    no_buffers = true,
+
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    --own_window_argb_value = 255,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    draw_blended = false,
+
+    stippled_borders = 2,
+    update_interval = 1.0,
+    uppercase = false, -- set to yes if you want all text to be in uppercase
+    use_spacer = 'right',
+    use_xft = true,
+
+}
+
+conky.text = [[
+${color1}${font Sans:normal:size=9}CPU ${hr 2}$color1$font
+${execi 86400 cat /proc/cpuinfo | grep 'model name' | uniq | sed 's/model name\t: //'}
+Total CPU: ${cpu cpu0}%
+${color1}${cpubar}$color1
+${cpugraph FFFFFF FFFFFF}
+$color1 Core 0 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 0'|awk '{print $3}'}        $color1 Core 1 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 1'|awk '{print $3}'} 
+$color1 Core 2 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 2'|awk '{print $3}'}        $color1 Core 3 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 3'|awk '{print $3}'} 
+${color1}0:${goto 35}${freq_g 0}GHz${goto 95}${cpu cpu0}%${goto 125}${cpubar cpu0 10, 100}${goto 230}${color1} 1:${goto 250}${freq_g 2}GHz${goto 310}${cpu cpu1}%${goto 350}${cpubar cpu1 10, 100}
+${color1}2:${goto 35}${freq_g 2}GHz${goto 95}${cpu cpu2}%${goto 125}${cpubar cpu2 10, 100}${goto 230}${color1} 3:${goto 250}${freq_g 3}GHz${goto 310}${cpu cpu3}%${goto 350}${cpubar cpu3 10, 100}
+${color1}4:${goto 35}${freq_g 4}GHz${goto 95}${cpu cpu4}%${goto 125}${cpubar cpu4 10, 100}${goto 230}${color1} 5:${goto 250}${freq_g 5}GHz${goto 310}${cpu cpu5}%${goto 350}${cpubar cpu5 10, 100}
+${color1}6:${goto 35}${freq_g 6}GHz${goto 95}${cpu cpu6}%${goto 125}${cpubar cpu7 10, 100}${goto 230}${color1} 7:${goto 250}${freq_g 7}GHz${goto 310}${cpu cpu7}%${goto 350}${cpubar cpu7 10, 100}
+
+
+]];

@@ -1,0 +1,37 @@
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    border_width = 6,
+    default_color = '#A4BCDC',
+    color1 = '#F1F1F2',
+    double_buffer = true,
+    draw_borders = false,
+    draw_outline = false, -- amplifies text if yes
+    draw_shades = false,
+    use_xft = true,
+    font = 'Ubuntu Mono:normal:size=9',
+    gap_x = 10,
+    gap_y = 995,
+    maximum_width  = 450,
+    minimum_width  = 450,
+    no_buffers = true,
+
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    own_window_argb_value = 255,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    draw_blended = false,
+
+    stippled_borders = 2,
+    update_interval = 1.0,
+    uppercase = false, -- set to yes if you want all text to be in uppercase
+    use_spacer = 'right',
+
+}
+conky.text = [[
+${color1}${font Sans:normal:size=9}Bitcoin ${hr 2}$color2$font
+${exec /home/jaime/.conky/fetch.sh}
+"target" --> "bitcoin 45.808€"
+]]

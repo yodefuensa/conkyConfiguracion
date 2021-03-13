@@ -1,0 +1,98 @@
+conky.config = {
+-- conky -q -c /media/5/Conky/S11_9_month_cal.conky &
+-- pkill -xf "conky -q -c /media/5/Conky/S11_9_month_cal.conky" &
+-- Original by CrunchBang user: iMBeCil
+-- http://crunchbang.org/forums/viewtopic.php?pid=368592#p368592
+
+--##  Begin Window Settings  ##################################################
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+
+-- Use the Xdbe extension? (eliminates flicker)
+-- It is highly recommended to use own window with this one
+-- so double buffer won't be so big.
+	double_buffer = true,
+
+--## ARGB can be used for real transparency
+--## NOTE that a composite manager is required for real transparency.
+--## This option will not work as desired (in most cases) in conjunction with
+--## own_window_type normal -  Options: yes or no
+	own_window_argb_visual = true,
+
+--## When ARGB visuals are enabled, this use this to modify the alpha value
+--## Use: own_window_type normal
+--## Use: own_window_transparent no
+--## Valid range is 0-255, where 0 is 0% opacity, and 255 is 100% opacity.
+--	own_window_argb_value = 0,
+
+	minimum_width = 450, minimum_height = 0,-- w|h
+	maximum_width = 450,
+
+	gap_x = 10,-- l|r
+	gap_y = 670,-- u|d
+
+	alignment = 'top_left',
+--###################################################  End Window Settings  ###
+--##  Font Settings  ##########################################################
+-- Use Xft (anti-aliased font and stuff)
+	use_xft = true,
+	font = 'Ubuntu Mono:normal:size=11',
+-- Alpha of Xft font. Must be a value at or between 1 and 0 ###
+	xftalpha = 1.0,
+
+-- Force UTF8? requires XFT ###
+	override_utf8_locale = true,
+
+	uppercase = false,
+--#####################################################  End Font Settings  ###
+--##  Color Settings  #########################################################
+	draw_shades = false,--#yes
+	default_shade_color = '#000000',
+	draw_outline = false,
+	default_outline_color = '#000000',
+
+    default_color = '#A4BCDC',
+    color1 = '#F1F1F2',
+--  color2 = '#0000FF',
+--  color2 = '#2E323F', -- la barra in alto di XFCE
+    color2 = '#FFFFFF',
+--####################################################  End Color Settings  ###
+--##  Borders Section  ########################################################
+	draw_borders = false,
+-- Stippled borders?
+	stippled_borders = 2,
+-- border margins
+	border_inner_margin = 05,
+	border_outer_margin = 0,
+-- border width
+	border_width = 6,
+-- graph borders
+	draw_graph_borders = true,--no
+--default_graph_size 15 40
+--####################################################  End Borders Secton  ###
+--##  Miscellaneous Section  ##################################################
+-- Boolean value, if true, Conky will be forked to background when started.
+	background = false,
+
+-- Adds spaces around certain objects to stop them from moving other things
+-- around, this only helps if you are using a mono font
+-- Options: right, left or none
+	use_spacer = 'none',
+
+-- Subtract (file system) buffers from used memory?
+	no_buffers = true,
+
+--#############################################  End Miscellaneous Section  ###
+
+	update_interval = 1,
+};
+
+conky.text = [[
+${color3}${font Sans:normal:size=9}CALENDARIO ${hr 2}${color}$font
+${execpi 3600 ncal -bh -m `date +%m` -A-2 -B4}
+${voffset 5}${execpi 3600 ncal -bh -m `date +%m` -A1 -B1 | sed "s/  $//;s/\($(date +"%B %Y" | sed 's/.*/\u&/')\)/\${color1}\1\${color}/;s/\($(date +%a | cut -c-2)\)/\${color1}\1\${color}/2;s/\(  .*\)\($(date +%-d)\)\(.*  \)/\1\${color1}\2\${color}\3/"}
+${voffset 5}${execpi 3600 ncal -bh -m `date +%m` -A4 -B-2 | head -n -1}
+#12
+]];
