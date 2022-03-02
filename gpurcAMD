@@ -1,0 +1,51 @@
+conky.config = {
+    alignment = 'top_right',
+    background = false,
+    border_width = 6,
+    default_color = '#F1F1F2',
+    color1 = '#F1F1F2',
+    color2 = '#E80808',
+    color3 = '#00d52a',
+    color4 = '#eee100',
+    double_buffer = true,
+    draw_borders = false,
+    draw_outline = false, -- amplifies text if yes
+    draw_shades = false,
+    font = 'Ubuntu Mono:normal:size=9',
+    gap_x = 10,
+    gap_y = 285,
+    maximum_width  = 450,
+    minimum_width  = 450,
+    no_buffers = true,
+
+    own_window = true,
+    own_window_type = 'desktop',
+    own_window_transparent = true,
+    own_window_argb_visual = true,
+    --own_window_argb_value = 255,
+    own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
+    draw_blended = false,
+
+    stippled_borders = 2,
+    update_interval = 1.0,
+    uppercase = false, -- set to yes if you want all text to be in uppercase
+    use_spacer = 'right',
+    use_xft = true,
+
+}
+conky.text = [[
+${voffset 2}${color1}${font :size=8:bold}GPU INFO ${hr 1}${font}
+${color1}Graphics cards:
+${execi 6000 hwinfo --gfxcard | grep "Model"}
+Driver: ${execi 6000 glxinfo | grep "OpenGL version" |cut -c52-70}
+${goto 20}Utilization: ${execi 2 cat /sys/class/drm/card0/device/gpu_busy_percent} % 
+Frequency Selected: 
+${execi 2 cat /sys/class/drm/card0/device/pp_dpm_sclk}
+Fan Control: ${execi 2 sensors | grep "fan1"}
+Temps:
+${goto 20} edge:${if_match "${exec sensors | grep "edge" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "edge" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "edge"|cut -c16-22} $color1
+$color1 ${goto 20} junction:${if_match "${exec sensors | grep "junction" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "junction" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "junction"|cut -c14-22} $color1
+$color1 ${goto 20} mmem:${if_match "${exec sensors | grep "mem" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "mem" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "mem"|cut -c14-22} $color1
+consumption: ${exec sensors | grep "power1"|cut -c10-}
+free VRAM: ${exec glxinfo | grep 'dedicated'| cut -c48-60} of ${exec glxinfo | grep 'Dedicated'| cut -c29-60}
+]];
