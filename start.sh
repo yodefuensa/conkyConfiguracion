@@ -1,6 +1,7 @@
 #!/bin/bash
 
-#sleep 20
+#delay start prevents some scripts NOT from starting
+sleep 5
 
 DIR=~/.conky/
 

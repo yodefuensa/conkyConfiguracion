@@ -32,9 +32,9 @@ conky.config = {
 }
 
 conky.text = [[
-${color1}${font Sans:normal:size=9}SYSTEM ${hr 2}$color1$font
-Kernel:${alignr} $sysname $kernel $machine
-Hostname:${alignr} $nodename
-Conky:${alignr} $conky_version
-Uptime:${alignr} $uptime
+${color1}${font Sans:normal:size=9}SYSTEM ${hr 2} $font  
+Kernel: $sysname $kernel $machine ${goto 270} Distro: ${alignr} ${execi 6000 lsb_release -d | grep 'Descr'|awk {'print $2 " " $3" " $4"" $5'}}
+Hostname: $nodename ${goto 270} Conky Version:${alignr} $conky_version
+Uptime: $uptime ${goto 270} Boot Time: ${alignr} ${alignr}${execi -1 systemd-analyze | grep -o -P '.{0,0}=.{2,5}' | cut -c 2-6 }s
+Tipo de sesión: ${execi 6000 echo $XDG_SESSION_TYPE}
 ]];
