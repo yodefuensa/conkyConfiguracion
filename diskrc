@@ -2,16 +2,15 @@ conky.config = {
     alignment = 'top_right',
     background = false,
     border_width = 6,
-    --default_color = '#FFFFEC',
     default_color = '#F1F1F2',
     color1 = '#F1F1F2',
     double_buffer = true,
     draw_borders = false,
     draw_outline = false, -- amplifies text if yes
-    draw_shades = false,
+    draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
     gap_x = 10,
-    gap_y = 650,
+    gap_y = 720,
     maximum_width  = 450,
     minimum_width  = 450,
     no_buffers = true,
@@ -33,16 +32,15 @@ conky.config = {
 
 conky.text = [[
 
-${voffset 2}${color1}${font :size=8:bold}HDD INFO ${hr 1}${font}
-${color1}DISKS AND PARTITIONS ${stippled_hr 1 1}
-${color1}Name, Size, Type, Mountpoint 
-${color3}${execi 6000 lsblk | egrep 'disk|part' | awk '{print "- " $1 ", " $4 ", " $6 ", " $7}'}
+${voffset 2}${color1}${font :size=8:bold}HDD INFO ${hr 2}${font}
+DISKS AND PARTITIONS ${stippled_hr 1 1}
+Name, Size, Type, Mountpoint 
+${execi 6000 lsblk | egrep 'disk|part' | awk '{print "- " $1 ", " $4 ", " $6 ", " $7}'}
 # DISK USAGE STATS
 ${voffset 2}${color1}DISK USAGE STATS ${stippled_hr 1 1}
-${color1}Used: ${color3}${fs_used /}${color1}${goto 200}Free:${goto 250}${color3}${fs_free /}
-${color2}${fs_bar /}
-${color1}Read: ${color3}${diskio_read}${goto 200}${color1}Write:${goto 250}${color3}${diskio_write}
-${color2}${diskiograph_read 20,130} ${alignr}${diskiograph_write 20,130}
+/nvme0n1p2 ${if_mounted /}${goto 130}( ${fs_used /} / ${fs_size /} )${goto 250}${fs_bar 6 /}${else}${goto 110}Not Mounted${endif}
+Read: ${color3}${diskio_read}${goto 200}Write:${goto 250}${diskio_write}
+${diskiograph_read 20,220} ${alignr}${diskiograph_write 20,220}
 
 ]];
 

@@ -20,9 +20,10 @@ launch "cpurc"
 launch "memoryrc"
 launch "diskrc"
 launch "networkrc"
-launch "others"
+#launch "others"
 launch "gpurc"
 launch "bateryrc"
 #launch "calrc"
+
 
 

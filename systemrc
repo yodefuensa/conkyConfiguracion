@@ -7,11 +7,11 @@ conky.config = {
     double_buffer = true,
     draw_borders = false,
     draw_outline = false, -- amplifies text if yes
-    draw_shades = false,
+    draw_shades = true,
     use_xft = true,
     font = 'Ubuntu Mono:normal:size=9',
     gap_x = 10,
-    gap_y = 40,
+    gap_y = 30,
     maximum_width  = 450,
     minimum_width  = 450,
     no_buffers = true,
@@ -32,7 +32,7 @@ conky.config = {
 }
 
 conky.text = [[
-${color1}${font Sans:normal:size=9}SYSTEM ${hr 2} $font  
+${color1}${font Sans:bold:size=9}SYSTEM ${hr 2} $font  
 Kernel: $sysname $kernel $machine ${goto 270} Distro: ${alignr} ${execi 6000 lsb_release -d | grep 'Descr'|awk {'print $2 " " $3" " $4"" $5'}}
 Hostname: $nodename ${goto 270} Conky Version:${alignr} $conky_version
 Uptime: $uptime ${goto 270} Boot Time: ${alignr} ${alignr}${execi -1 systemd-analyze | grep -o -P '.{0,0}=.{2,5}' | cut -c 2-6 }s

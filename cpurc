@@ -4,7 +4,7 @@ conky.config = {
     border_width = 6,
     default_color = '#F1F1F2',
     color1 = '#F1F1F2', --white
-    color2 = '#990000', --red
+    color2 = '#E80808', --red
     color3 = '#00d52a', --green
     color4 = '#eee100', --yellow
     double_buffer = true,
@@ -13,7 +13,7 @@ conky.config = {
     draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
     gap_x = 10,
-    gap_y = 95,
+    gap_y = 120,
     maximum_width  = 450,
     minimum_width  = 450,
     no_buffers = true,
@@ -35,20 +35,15 @@ conky.config = {
 }
 
 conky.text = [[
-${color1}${font Sans:normal:size=9}CPU ${hr 2}$color1$font
+${color1}${font Sans:bold:size=9}CPU ${hr 2}$color1$font
 ${execi 86400 cat /proc/cpuinfo | grep 'model name' | uniq | sed 's/model name\t: //'} ${goto 270} Average cpu usage: ${cpu cpu0}%
-${cpugraph 00d52a 990000  -t 100}
-$color1 Core 0 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 0'|awk '{print $3}'}        $color1 Core 1 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 1'|awk '{print $3}'} 
-$color1 Core 2 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 2'|awk '{print $3}'}        $color1 Core 3 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 3'|awk '{print $3}'} 
+${cpugraph ffffff ffffff  -t 100}
+${goto 50}$color1 Core 0 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 0'|awk '{print $3}'}    ${goto 270}    $color1 Core 1 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 1'|awk '{print $3}'} 
+${goto 50}$color1 Core 2 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 2'|awk '{print $3}'}    ${goto 270}    $color1 Core 3 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 3'|awk '{print $3}'} 
 ${color1}0:${goto 35}${freq_g 0}GHz${goto 90}${cpu cpu0}%${goto 125}${cpubar cpu0 10, 100}${goto 240}${color1} 1:${goto 270}${freq_g 2}GHz${goto 320}${cpu cpu1}%${goto 350}${cpubar cpu1 10, 100}
 ${color1}2:${goto 35}${freq_g 2}GHz${goto 90}${cpu cpu2}%${goto 125}${cpubar cpu2 10, 100}${goto 240}${color1} 3:${goto 270}${freq_g 3}GHz${goto 320}${cpu cpu3}%${goto 350}${cpubar cpu3 10, 100}
 ${color1}4:${goto 35}${freq_g 4}GHz${goto 90}${cpu cpu4}%${goto 125}${cpubar cpu4 10, 100}${goto 240}${color1} 5:${goto 270}${freq_g 5}GHz${goto 320}${cpu cpu5}%${goto 350}${cpubar cpu5 10, 100}
 ${color1}6:${goto 35}${freq_g 6}GHz${goto 90}${cpu cpu6}%${goto 125}${cpubar cpu7 10, 100}${goto 240}${color1} 7:${goto 270}${freq_g 7}GHz${goto 320}${cpu cpu7}%${goto 350}${cpubar cpu7 10, 100}
-top process${goto 110}  usage ${goto 170}  pid ${hr 1}
-$color2${top name 1}${top cpu 1}% (${top pid 1})$color1${goto 260}${top name 4}${top cpu 4}% (${top pid 4})
-$color4${top name 2}${top cpu 2}% (${top pid 2})$color1${goto 260}${top name 5}${top cpu 5}% (${top pid 5})
-${top name 3}${top cpu 3}% (${top pid 3})${goto 260}${top name 6}${top cpu 6}% (${top pid 6})
-
 
 
 ]];

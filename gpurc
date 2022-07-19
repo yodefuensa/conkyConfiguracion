@@ -8,10 +8,10 @@ conky.config = {
     double_buffer = true,
     draw_borders = false,
     draw_outline = false, -- amplifies text if yes
-    draw_shades = false,
+    draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
     gap_x = 10,
-    gap_y = 285,
+    gap_y = 475,
     maximum_width  = 450,
     minimum_width  = 450,
     no_buffers = true,
@@ -33,7 +33,7 @@ conky.config = {
 }
 conky.text = [[
 
-${voffset 2}${color1}${font :size=8:bold}GPU INFO ${hr 1}${font}
+${voffset 2}${color1}${font :size=8:bold}GPU INFO ${hr 2}${font}
 ${color1}Graphics cards:
 ${execi 6000 hwinfo --gfxcard | grep "Model"}
 ${voffset 2}${color1}MORE INFO ON Intel® GPU ${stippled_hr 1 1}
