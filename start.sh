@@ -14,16 +14,19 @@ launch() {
     fi
 }
 
-#launch "clockrc"
 launch "systemrc"
 launch "cpurc"
 launch "memoryrc"
+#for hybrid intel & nvidia
+launch "gpurc"
+#for AMD graphics
+#launch "gpurcAMD"
 launch "diskrc"
 launch "networkrc"
-#launch "others"
-launch "gpurc"
 launch "bateryrc"
-#launch "calrc"
+#launch "bitcoin"
+sh $HOME/.conky/spotify-conky/start.sh
+
 
 
 
