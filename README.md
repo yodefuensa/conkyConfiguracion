@@ -5,14 +5,14 @@ The dependencies are: ffmpeg playerctl for the spotify player and jq & awk to qu
 
 Once everything is installed, unzip the content in a folder and execute the start.sh script
 
-## Setting
+## Config
 in start.sh the conky scripts are launched so you should uncomment the ones you are going to use in the same way you have to change the path for the spotify viewer
 sh $HOME/.conky/spotify-conky/start.sh
 As you can see I created a hidden folder called conky with all the files
 
 Obviously I recommend changing gap_y of each script so that it fits better on each screen, as well as the different cpu and network options depending on your equipment.
 
-## Captures
+## Screenshots
 ![image](https://user-images.githubusercontent.com/21121575/180258501-b0467b3a-1936-418b-b4cc-a793b32e51fc.png)
 ![image](https://user-images.githubusercontent.com/21121575/180258670-58d821e4-befe-47e9-b896-9fae72c3d298.png)
 ![image](https://user-images.githubusercontent.com/21121575/180258764-5ff1dfff-0798-4009-900c-7dba8049b2f6.png)
