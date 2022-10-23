@@ -18,12 +18,12 @@ launch "systemrc"
 launch "cpurc"
 launch "memoryrc"
 #for hybrid intel & nvidia
-launch "gpurc"
+#launch "gpurc"
 #for AMD graphics
-#launch "gpurcAMD"
+launch "gpurcAMD"
 launch "diskrc"
 launch "networkrc"
-launch "bateryrc"
+#launch "bateryrc"
 #launch "bitcoin"
 sh $HOME/.conky/spotify-conky/start.sh
 

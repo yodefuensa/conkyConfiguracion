@@ -1,5 +1,5 @@
 conky.config = {
-    alignment = 'top_right',
+    alignment = 'top_left',
     background = false,
     border_width = 6,
     default_color = '#F1F1F2',
@@ -12,7 +12,7 @@ conky.config = {
     draw_outline = false, -- amplifies text if yes
     draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
-    gap_x = 10,
+    gap_x = -1900,
     gap_y = 120,
     maximum_width  = 450,
     minimum_width  = 450,

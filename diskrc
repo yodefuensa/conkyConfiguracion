@@ -1,5 +1,5 @@
 conky.config = {
-    alignment = 'top_right',
+    alignment = 'top_left',
     background = false,
     border_width = 6,
     default_color = '#F1F1F2',
@@ -9,7 +9,7 @@ conky.config = {
     draw_outline = false, -- amplifies text if yes
     draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
-    gap_x = 10,
+    gap_x = -1900,
     gap_y = 720,
     maximum_width  = 450,
     minimum_width  = 450,
@@ -38,7 +38,8 @@ Name, Size, Type, Mountpoint
 ${execi 6000 lsblk | egrep 'disk|part' | awk '{print "- " $1 ", " $4 ", " $6 ", " $7}'}
 # DISK USAGE STATS
 ${voffset 2}${color1}DISK USAGE STATS ${stippled_hr 1 1}
-/nvme0n1p2 ${if_mounted /}${goto 130}( ${fs_used /} / ${fs_size /} )${goto 250}${fs_bar 6 /}${else}${goto 110}Not Mounted${endif}
+/sdb3 ${if_mounted /}${goto 130}( ${fs_used /} / ${fs_size /} )${goto 280}${fs_bar 6 /}${else}${goto 110}Not Mounted${endif}
+/sda1 ${if_mounted /media/jaime}${goto 130}( ${fs_used /media/jaime} / ${fs_size /media/jaime} )${goto 280}${fs_bar 6 /media/jaime}${else}${goto 110}Not Mounted${endif}    
 Read: ${color3}${diskio_read}${goto 200}Write:${goto 250}${diskio_write}
 ${diskiograph_read 20,220} ${alignr}${diskiograph_write 20,220}
 

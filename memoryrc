@@ -1,5 +1,5 @@
 conky.config = {
-    alignment = 'top_right',
+    alignment = 'top_left',
     background = false,
     border_width = 6,
     default_color = '#F1F1F2',
@@ -11,8 +11,8 @@ conky.config = {
     draw_outline = false, -- amplifies text if yes
     draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
-    gap_x = 10,
-    gap_y = 300,
+    gap_x = -1900,
+    gap_y = 290,
     maximum_width  = 450,
     minimum_width  = 450,
     no_buffers = true,
@@ -44,6 +44,8 @@ ${color1}${top name 3}${goto 100}${top cpu 3}% (${top pid 3})${goto 260}${top_me
 ${top name 4}${goto 100}${top cpu 4}% (${top pid 4})${goto 260}${top_mem name 4} ${goto 360}${top_mem mem_res 4} ${alignr} ${top_mem pid 4}  
 ${top name 5}${goto 100}${top cpu 5}% (${top pid 5})${goto 260}${top_mem name 5} ${goto 360}${top_mem mem_res 5} ${alignr} ${top_mem pid 5}  
 ${top name 6}${goto 100}${top cpu 6}% (${top pid 6})${goto 260}${top_mem name 6} ${goto 360}${top_mem mem_res 6} ${alignr} ${top_mem pid 6} 
+${top name 7}${goto 100}${top cpu 7}% (${top pid 7})${goto 260}${top_mem name 7} ${goto 360}${top_mem mem_res 7} ${alignr} ${top_mem pid 7}  
+${top name 8}${goto 100}${top cpu 8}% (${top pid 8})${goto 260}${top_mem name 8} ${goto 360}${top_mem mem_res 8} ${alignr} ${top_mem pid 8} 
 
 
 
