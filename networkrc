@@ -10,8 +10,8 @@ conky.config = {
     draw_outline = false, -- amplifies text if yes
     draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1900,
-    gap_y = 960,
+    gap_x = -1050,
+    gap_y = 900,
     maximum_width  = 450,
     minimum_width  = 450,
     net_avg_samples = 1,
@@ -36,16 +36,16 @@ conky.config = {
 conky.text = [[
 ${color1}${font Sans:bold:size=9}NETWORK ${hr 2}$color$font
 State:${alignr} ${if_existing /sys/class/net/wlp5s0/operstate up}${color FFFFFF}ONLINE${else}${color red}OFFLINE${endif}$color
-#ISP: ${alignr} ${execi 6000 curl ipinfo.io/org}
-#Locale: ${alignr} ${execi 6000 curl ipinfo.io/city}, ${execi 6000 curl ipinfo.io/region}, ${execi 6000 curl ipinfo.io/country}
-#${alignr} ${execi 6000 curl ipinfo.io/loc}
+ISP: ${alignr} ${execi 6000 curl ipinfo.io/org}
+Locale: ${alignr} ${execi 6000 curl ipinfo.io/city}, ${execi 6000 curl ipinfo.io/region}, ${execi 6000 curl ipinfo.io/country}
+${alignr} ${execi 6000 curl ipinfo.io/loc}
 Local IP: ${alignr} ${addr wlp5s0}
-#Public IP: ${alignr} ${execi 600 wget http://ipinfo.io/ip -qO -}
-#Total connections: ${alignr}${tcp_portmon 1 65535 count}
-#Ping to 192.168.1.1: $alignr ${texeci 15 output=$(ping -c 10 192.168.1.1); avg=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $5}'` | sed 's/,/./'); mdev=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $7}' | sed 's/ .*//'` | sed 's/,/./'); echo $avg ± $mdev ms}
-#Ping to 8.8.8.8: $alignr ${texeci 15 output=$(ping -c 10 8.8.8.8); avg=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $5}'` | sed 's/,/./'); mdev=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $7}' | sed 's/ .*//'` | sed 's/,/./'); echo $avg ± $mdev ms}
+Public IP: ${alignr} ${execi 600 wget http://ipinfo.io/ip -qO -}
+Total connections: ${alignr}${tcp_portmon 1 65535 count}
+Ping to 192.168.1.1: $alignr ${texeci 15 output=$(ping -c 10 192.168.1.1); avg=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $5}'` | sed 's/,/./'); mdev=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $7}' | sed 's/ .*//'` | sed 's/,/./'); echo $avg ± $mdev ms}
+Ping to 8.8.8.8: $alignr ${texeci 15 output=$(ping -c 10 8.8.8.8); avg=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $5}'` | sed 's/,/./'); mdev=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $7}' | sed 's/ .*//'` | sed 's/,/./'); echo $avg ± $mdev ms}
 Down: ${downspeed wlp5s0} / s ${alignr} Up: ${upspeed wlp5s0} / s
 ${downspeedgraph wlp5s0 20,220 ffffff ffffff} ${alignr}${upspeedgraph wlp5s0 20,220 ffffff ffffff}
 Total: ${totaldown wlp5s0} ${alignr}Total: ${totalup wlp5s0}
-#Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768 61000 count}${alignr}
+Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768 61000 count}${alignr}
 ]];

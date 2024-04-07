@@ -12,8 +12,8 @@ conky.config = {
     draw_outline = false, -- amplifies text if yes
     draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1900,
-    gap_y = 495,
+    gap_x = -1050,
+    gap_y = 350,
     maximum_width  = 450,
     minimum_width  = 450,
     no_buffers = true,
@@ -36,16 +36,17 @@ conky.config = {
 conky.text = [[
 ${voffset 2}${color1}${font :size=8:bold}GPU INFO ${hr 1}${font}
 ${color1}Graphics cards:
-${execi 6000 hwinfo --gfxcard | grep "Model"}
+${execi 6000 hwinfo --gfxcard | grep "Model"| cut -c 24-64}
 Driver: ${execi 6000 glxinfo | grep "OpenGL version" |cut -c52-70}
 ${goto 20}Utilization: ${execi 2 cat /sys/class/drm/card0/device/gpu_busy_percent} % 
+${execgraph "radeontop -d- -l1 | grep -o 'gpu [0-9]\{1,3\}' | cut -c 5-10"  000000 FF6347}
 Frequency Selected: 
 ${execi 2 cat /sys/class/drm/card0/device/pp_dpm_sclk}
 Fan Control: ${execi 2 sensors | grep "fan1"}
 Temps:
-${goto 20} edge:${if_match "${exec sensors | grep "edge" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "edge" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "edge"|cut -c16-22} $color1
-$color1 ${goto 20} junction:${if_match "${exec sensors | grep "junction" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "junction" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "junction"|cut -c14-22} $color1
-$color1 ${goto 20} mmem:${if_match "${exec sensors | grep "mem" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "mem" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "mem"|cut -c14-22} $color1
-consumption: ${exec sensors | grep "power1"|cut -c10-}
-free VRAM: ${exec glxinfo | grep 'dedicated'| cut -c48-60} of ${exec glxinfo | grep 'Dedicated'| cut -c29-60}
+${goto 20} edge:${if_match "${exec sensors | grep "edge" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "edge" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "edge"|cut -c16-22} $color1 ${goto 140} junction:${if_match "${exec sensors | grep "junction" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "junction" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "junction"|cut -c14-22} $color1 $color1 ${goto 290} mmem:${if_match "${exec sensors | grep "mem" |cut -c16-17}" <="70"}$color3 ${else} $color4 ${if_match "${exec sensors|grep "mem" |cut -c16-17}" >="99"}$color2 ${endif} ${endif} ${exec sensors|grep "mem"|cut -c14-22} $color1
+consumption: ${exec sensors | grep "PPT"|cut -c10-}
+free VRAM: ${exec glxinfo | grep 'dedicated'| cut -c48-60} of ${exec glxinfo | grep 'Dedicated'| cut -c29-60} ${goto 290}VRAM Usage: ${execi 5 radeontop -d- -l1 | grep -o 'vram [0-9]\{1,3\}' | cut -c 5-10}%
+${execgraph "radeontop -d- -l1 | grep -o 'vram [0-9]\{1,3\}' | cut -c 5-10" 000000 FF6347}
+
 ]];

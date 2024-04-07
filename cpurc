@@ -12,8 +12,8 @@ conky.config = {
     draw_outline = false, -- amplifies text if yes
     draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1900,
-    gap_y = 120,
+    gap_x = -1050,
+    gap_y = -70,
     maximum_width  = 450,
     minimum_width  = 450,
     no_buffers = true,
@@ -37,13 +37,16 @@ conky.config = {
 conky.text = [[
 ${color1}${font Sans:bold:size=9}CPU ${hr 2}$color1$font
 ${execi 86400 cat /proc/cpuinfo | grep 'model name' | uniq | sed 's/model name\t: //'} ${goto 270} Average cpu usage: ${cpu cpu0}%
-${cpugraph ffffff ffffff  -t 100}
-${goto 50}$color1 Core 0 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 0'|awk '{print $3}'}    ${goto 270}    $color1 Core 1 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 1'|awk '{print $3}'} 
-${goto 50}$color1 Core 2 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 2'|awk '{print $3}'}    ${goto 270}    $color1 Core 3 Temp: ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Core 0'|cut -c17-18}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Core 3'|awk '{print $3}'} 
+${cpugraph 000000 FF6347  -t 100}
+${goto 50}$color1 Core 0 Temp: ${exec sensors|grep 'Tctl'|cut -c16-17}
+#${if_match "${exec sensors|grep 'Tctl'|cut -c16-17}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Tctl'|cut -c16-17}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Tctl'|awk '{print $3}'}
 ${color1}0:${goto 35}${freq_g 0}GHz${goto 90}${cpu cpu0}%${goto 125}${cpubar cpu0 10, 100}${goto 240}${color1} 1:${goto 270}${freq_g 2}GHz${goto 320}${cpu cpu1}%${goto 350}${cpubar cpu1 10, 100}
 ${color1}2:${goto 35}${freq_g 2}GHz${goto 90}${cpu cpu2}%${goto 125}${cpubar cpu2 10, 100}${goto 240}${color1} 3:${goto 270}${freq_g 3}GHz${goto 320}${cpu cpu3}%${goto 350}${cpubar cpu3 10, 100}
 ${color1}4:${goto 35}${freq_g 4}GHz${goto 90}${cpu cpu4}%${goto 125}${cpubar cpu4 10, 100}${goto 240}${color1} 5:${goto 270}${freq_g 5}GHz${goto 320}${cpu cpu5}%${goto 350}${cpubar cpu5 10, 100}
 ${color1}6:${goto 35}${freq_g 6}GHz${goto 90}${cpu cpu6}%${goto 125}${cpubar cpu7 10, 100}${goto 240}${color1} 7:${goto 270}${freq_g 7}GHz${goto 320}${cpu cpu7}%${goto 350}${cpubar cpu7 10, 100}
+${color1}8:${goto 35}${freq_g 8}GHz${goto 90}${cpu cpu8}%${goto 125}${cpubar cpu8 10, 100}${goto 240}${color1} 9:${goto 270}${freq_g 9}GHz${goto 320}${cpu cpu9}%${goto 350}${cpubar cpu9 10, 100}
+${color1}10:${goto 35}${freq_g 10}GHz${goto 90}${cpu cpu10}%${goto 125}${cpubar cpu10 10, 100}${goto 240}${color1} 11:${goto 270}${freq_g 11}GHz${goto 320}${cpu cpu11}%${goto 350}${cpubar cpu11 10, 100}
+
 
 
 ]];

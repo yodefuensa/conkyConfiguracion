@@ -9,8 +9,8 @@ conky.config = {
     draw_outline = false, -- amplifies text if yes
     draw_shades = true,
     font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1900,
-    gap_y = 720,
+    gap_x = -1050,
+    gap_y = 640,
     maximum_width  = 450,
     minimum_width  = 450,
     no_buffers = true,
@@ -39,7 +39,7 @@ ${execi 6000 lsblk | egrep 'disk|part' | awk '{print "- " $1 ", " $4 ", " $6 ", 
 # DISK USAGE STATS
 ${voffset 2}${color1}DISK USAGE STATS ${stippled_hr 1 1}
 /sdb3 ${if_mounted /}${goto 130}( ${fs_used /} / ${fs_size /} )${goto 280}${fs_bar 6 /}${else}${goto 110}Not Mounted${endif}
-/sda1 ${if_mounted /media/jaime}${goto 130}( ${fs_used /media/jaime} / ${fs_size /media/jaime} )${goto 280}${fs_bar 6 /media/jaime}${else}${goto 110}Not Mounted${endif}    
+#/sda1 ${if_mounted /media/jaime}${goto 130}( ${fs_used /media/jaime} / ${fs_size /media/jaime} )${goto 280}${fs_bar 6 /media/jaime}${else}${goto 110}Not Mounted${endif}    
 Read: ${color3}${diskio_read}${goto 200}Write:${goto 250}${diskio_write}
 ${diskiograph_read 20,220} ${alignr}${diskiograph_write 20,220}
 

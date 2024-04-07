@@ -2,7 +2,7 @@
 ## Instalacion
 Instalar conky en tu distribución
 
-Las dependecias son: ffmpeg playerctl para el reproductor de spotify y jq & awk para consultar el precio del bitcoin. Quizas el monitor de gpuAMD tiene alguna dependecia, pero aun tengo que revisarlo
+Las dependecias son: ffmpeg playerctl para el reproductor de spotify y jq & awk para consultar el precio del bitcoin. Quizas el monitor de gpuAMD tiene alguna dependecia (hwinfo), pero aun tengo que revisarlo
 
 Una vez con todo instalado descomprime el contenido en una carpeta y ejecuta el script start.sh
 
