@@ -1,40 +1,39 @@
 conky.config = {
-    alignment = 'top_left',
-    background = true,
-    border_width = 6,
-    default_color = '#F1F1F2',
-    color1 = '#F1F1F2',
-    double_buffer = true,
-    draw_borders = false,
-    draw_outline = false, -- amplifies text if yes
-    draw_shades = true,
-    use_xft = true,
-    font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1050,
-    gap_y = -170,
-    maximum_width  = 450,
-    minimum_width  = 450,
-    no_buffers = true,
 
+    -- Run settings
+    update_interval = 5.0,
+    background = false,
+
+    -- Positioning
+    alignment = 'top_right',
+    gap_x = 10,
+    gap_y = 35,
+    maximum_width = 450,
+    minimum_width = 450,
+
+    -- Draw settings
+    draw_shades = true,
+    double_buffer = true,
+    no_buffers = true,
+    
+    -- Compositor settings
     own_window = true,
     own_window_type = 'desktop',
     own_window_transparent = true,
     own_window_argb_visual = true,
     own_window_argb_value = 255,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-    draw_blended = false,
-
-    stippled_borders = 2,
-    update_interval = 1.0,
-    uppercase = false, -- set to yes if you want all text to be in uppercase
-    use_spacer = 'right',
-
+    
+    -- Text settings
+    font = 'Ubuntu Mono:normal:size=9',
+    use_xft = true,
+    default_color = '#F1F1F2',
 }
 
 conky.text = [[
-${color1}${font Sans:bold:size=9}SYSTEM ${hr 2} $font  
-Kernel: $sysname $kernel $machine ${goto 270} Distro: ${alignr} ${execi 6000 lsb_release -d | grep 'Descr'|awk {'print $2 " " $3" " $4"" $5'}}
-Hostname: $nodename ${goto 270} Conky Version:${alignr} $conky_version
-Uptime: $uptime ${goto 270} Boot Time: ${alignr} ${alignr}${execi -1 systemd-analyze | grep -o -P '.{0,0}=.{2,5}' | cut -c 2-6 }s
-Tipo de sesión: ${execi 6000 echo $XDG_SESSION_TYPE}
-]];
+${font Ubuntu:bold:size=9}SYSTEM ${hr 2} $font
+Kernel: $sysname $kernel $machine ${goto 270} Distro: ${alignr} ${execi 6000 lsb_release -d | cut -f2-}
+Hostname: $nodename ${goto 270} Conky Version: ${alignr} $conky_version
+Uptime: $uptime ${goto 270} Boot Time: ${alignr} ${alignr}${execi 6000 systemd-analyze | grep -o -P '.{0,0}=.{2,5}' | cut -c 2-6 }
+Tipo de sesión: ${execi 3600 echo $XDG_SESSION_TYPE} #Se actualiza cada hora (3600 segundos)
+]]

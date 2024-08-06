@@ -1,53 +1,54 @@
 conky.config = {
-    alignment = 'top_left',
+
+    -- Run settings
+    update_interval = 1.0,
     background = false,
-    border_width = 6,
-    default_color = '#F1F1F2',
-    color1 = '#F1F1F2', --white
-    color2 = '#E80808', --red
-    color4 = '#eee100', --yellow
+
+    -- Positioning
+    alignment = 'top_right',
+    gap_x = 10,
+    gap_y = 340,
+    maximum_width = 450,
+    minimum_width = 450,
+
+    -- Draw settings
     double_buffer = true,
-    draw_borders = false,
-    draw_outline = false, -- amplifies text if yes
     draw_shades = true,
-    font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1050,
-    gap_y = 130,
-    maximum_width  = 450,
-    minimum_width  = 450,
     no_buffers = true,
 
+    -- Compositor settings
     own_window = true,
     own_window_type = 'desktop',
     own_window_transparent = true,
     own_window_argb_visual = true,
     own_window_argb_value = 250,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-    draw_blended = false,
-
-    stippled_borders = 2,
-    update_interval = 1.0,
-    uppercase = false, -- set to yes if you want all text to be in uppercase
-    use_spacer = 'right',
+   
+    -- Text settings
+    font = 'Ubuntu Mono:normal:size=9',
     use_xft = true,
+    default_color = '#F1F1F2',
+
+
+
+    
+    
+    
 }
 
 conky.text = [[
-${color1}${font Sans:bold:size=9}MEMORY ${hr 2}$color$font
-RAM: ${mem} / ${memmax}${if_match $memperc<10} ${endif}${goto 200} $memperc% ${membar 6}
-Swap: ${swap} / ${swapmax}${if_match $swapperc<10} ${endif}${goto 200} $swapperc% ${swapbar 6}
-${color1}${font Sans:bold:size=9}PROCESS ${hr 2}$color$font    
-TOP_process ${goto 105 }Usage ${goto 160 }PID ${goto 250} TOP_mem ${goto 360}%MEM ${alignr} PID  
-${color2}${top name 1}${goto 100}${top cpu 1}% (${top pid 1})${goto 260}${top_mem name 1} ${goto 360}${top_mem mem_res 1} ${alignr} ${top_mem pid 1} 
-${color4}${top name 2}${goto 100}${top cpu 2}% (${top pid 2})${goto 260}${top_mem name 2} ${goto 360}${top_mem mem_res 2} ${alignr}${top_mem pid 2}  
-${color1}${top name 3}${goto 100}${top cpu 3}% (${top pid 3})${goto 260}${top_mem name 3} ${goto 360}${top_mem mem_res 3} ${alignr} ${top_mem pid 3}  
-${top name 4}${goto 100}${top cpu 4}% (${top pid 4})${goto 260}${top_mem name 4} ${goto 360}${top_mem mem_res 4} ${alignr} ${top_mem pid 4}  
-${top name 5}${goto 100}${top cpu 5}% (${top pid 5})${goto 260}${top_mem name 5} ${goto 360}${top_mem mem_res 5} ${alignr} ${top_mem pid 5}  
-${top name 6}${goto 100}${top cpu 6}% (${top pid 6})${goto 260}${top_mem name 6} ${goto 360}${top_mem mem_res 6} ${alignr} ${top_mem pid 6} 
-${top name 7}${goto 100}${top cpu 7}% (${top pid 7})${goto 260}${top_mem name 7} ${goto 360}${top_mem mem_res 7} ${alignr} ${top_mem pid 7}  
-${top name 8}${goto 100}${top cpu 8}% (${top pid 8})${goto 260}${top_mem name 8} ${goto 360}${top_mem mem_res 8} ${alignr} ${top_mem pid 8} 
+${font Sans:bold:size=9}MEMORY ${hr 2}$font
+RAM: ${mem} / ${memmax} ${goto 200}${memperc}% ${membar 6}
+Swap: ${swap} / ${swapmax} ${goto 200}${swapperc}% ${swapbar 6}
 
-
-
-
-]];
+${font Sans:bold:size=9}PROCESS ${hr 2}$font    
+TOP_process ${goto 105}Usage ${goto 160}PID ${goto 250} TOP_mem ${goto 360}%MEM ${alignr} PID  
+${top name 1}${goto 100}${top cpu 1}% (${top pid 1})${goto 260}${top_mem name 1}${goto 360}${top_mem mem_res 1}${alignr}${top_mem pid 1} 
+${top name 2}${goto 100}${top cpu 2}% (${top pid 2})${goto 260}${top_mem name 2}${goto 360}${top_mem mem_res 2}${alignr}${top_mem pid 2}
+${top name 3}${goto 100}${top cpu 3}% (${top pid 3})${goto 260}${top_mem name 3}${goto 360}${top_mem mem_res 3}${alignr}${top_mem pid 3}
+${top name 4}${goto 100}${top cpu 4}% (${top pid 4})${goto 260}${top_mem name 4}${goto 360}${top_mem mem_res 4}${alignr}${top_mem pid 4}
+${top name 5}${goto 100}${top cpu 5}% (${top pid 5})${goto 260}${top_mem name 5}${goto 360}${top_mem mem_res 5}${alignr}${top_mem pid 5}
+${top name 6}${goto 100}${top cpu 6}% (${top pid 6})${goto 260}${top_mem name 6}${goto 360}${top_mem mem_res 6}${alignr}${top_mem pid 6}
+${top name 7}${goto 100}${top cpu 7}% (${top pid 7})${goto 260}${top_mem name 7}${goto 360}${top_mem mem_res 7}${alignr}${top_mem pid 7}
+${top name 8}${goto 100}${top cpu 8}% (${top pid 8})${goto 260}${top_mem name 8}${goto 360}${top_mem mem_res 8}${alignr}${top_mem pid 8}
+]]

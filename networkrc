@@ -1,51 +1,48 @@
 conky.config = {
-    alignment = 'top_left',
+    -- Run settings
+    update_interval = 2.0,
     background = false,
-    border_width = 6,
-    cpu_avg_samples = 1,
-    default_color = '#F1F1F2',
-    color1 = '#F1F1F2',
-    double_buffer = true,
-    draw_borders = false,
-    draw_outline = false, -- amplifies text if yes
-    draw_shades = true,
-    font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1050,
-    gap_y = 900,
-    maximum_width  = 450,
-    minimum_width  = 450,
-    net_avg_samples = 1,
-    no_buffers = true,
 
+    -- Positioning
+    alignment = 'top_right',
+    gap_x = 10,
+    gap_y = 860,
+    maximum_width = 450,
+    minimum_width = 450,
+
+    -- Draw settings
+    draw_shades = true,
+    double_buffer = true,
+    no_buffers = true,
+    
+    -- Compositor settings
     own_window = true,
     own_window_type = 'desktop',
     own_window_transparent = true,
     own_window_argb_visual = true,
     own_window_argb_value = 255,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-    draw_blended = false,
-
-    stippled_borders = 2,
-    total_run_times = 0,
-    update_interval = 1.0,
-    uppercase = false, -- set to yes if you want all text to be in uppercase
-    use_spacer = 'left',
+    
+    -- Text settings
+    font = 'Ubuntu Mono:normal:size=9',
     use_xft = true,
+    default_color = '#F1F1F2',
 }
 
 conky.text = [[
 ${color1}${font Sans:bold:size=9}NETWORK ${hr 2}$color$font
-State:${alignr} ${if_existing /sys/class/net/wlp5s0/operstate up}${color FFFFFF}ONLINE${else}${color red}OFFLINE${endif}$color
-ISP: ${alignr} ${execi 6000 curl ipinfo.io/org}
-Locale: ${alignr} ${execi 6000 curl ipinfo.io/city}, ${execi 6000 curl ipinfo.io/region}, ${execi 6000 curl ipinfo.io/country}
-${alignr} ${execi 6000 curl ipinfo.io/loc}
-Local IP: ${alignr} ${addr wlp5s0}
-Public IP: ${alignr} ${execi 600 wget http://ipinfo.io/ip -qO -}
+State:${alignr}${if_existing /sys/class/net/wlan0/operstate up}${color FFFFFF}ONLINE${else}${color red}OFFLINE${endif}$color
+ISP: ${alignr}${execi 6000 curl -s ipinfo.io/org}
+Locale: ${alignr}${execi 6000 curl -s ipinfo.io/city}, ${execi 6000 curl -s ipinfo.io/region}, ${execi 6000 curl -s ipinfo.io/country}
+${alignr}${execi 6000 curl -s ipinfo.io/loc}
+Local IP: ${alignr}${addr wlan0}
+Public IP: ${alignr}${execi 600 wget -qO- http://ipinfo.io/ip}
 Total connections: ${alignr}${tcp_portmon 1 65535 count}
-Ping to 192.168.1.1: $alignr ${texeci 15 output=$(ping -c 10 192.168.1.1); avg=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $5}'` | sed 's/,/./'); mdev=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $7}' | sed 's/ .*//'` | sed 's/,/./'); echo $avg ± $mdev ms}
-Ping to 8.8.8.8: $alignr ${texeci 15 output=$(ping -c 10 8.8.8.8); avg=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $5}'` | sed 's/,/./'); mdev=$(printf "%0.1f" `echo $output | awk -F '/' 'END {print $7}' | sed 's/ .*//'` | sed 's/,/./'); echo $avg ± $mdev ms}
-Down: ${downspeed wlp5s0} / s ${alignr} Up: ${upspeed wlp5s0} / s
-${downspeedgraph wlp5s0 20,220 ffffff ffffff} ${alignr}${upspeedgraph wlp5s0 20,220 ffffff ffffff}
-Total: ${totaldown wlp5s0} ${alignr}Total: ${totalup wlp5s0}
-Inbound: ${tcp_portmon 1 32767 count} Outbound: ${tcp_portmon 32768 61000 count}${alignr}
+Ping to 192.168.1.1:${alignr}${texeci 15 ping -c 10 192.168.1.1 | awk -F'/' 'END {print $5 " ms ± " $7 " ms"}'}
+Ping to 8.8.8.8:${alignr}${texeci 15 ping -c 10 8.8.8.8 | awk -F'/' 'END {print $5 " ms ± " $7 " ms"}'}
+Down: ${downspeed wlan0}/s${alignr}Up: ${upspeed wlan0}/s
+${downspeedgraph wlan0 20,220 ffffff ffffff}${alignr}${upspeedgraph wlan0 20,220 ffffff ffffff}
+Total: ${totaldown wlan0}${alignr}Total: ${totalup wlan0}
+Inbound: ${tcp_portmon 1 32767 count}${alignr}Outbound: ${tcp_portmon 32768 61000 count}
 ]];
+

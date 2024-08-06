@@ -1,12 +1,8 @@
 conky.config = {
     alignment = 'top_left',
     background = false,
-    border_width = 6,
-    default_color = '#A4BCDC',
-    color1 = '#F1F1F2',
+    default_color = '#F1F1F2',
     double_buffer = true,
-    draw_borders = false,
-    draw_outline = false, -- amplifies text if yes
     draw_shades = true,
     use_xft = true,
     font = 'Ubuntu Mono:normal:size=9',
@@ -22,18 +18,14 @@ conky.config = {
     own_window_argb_visual = true,
     own_window_argb_value = 255,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-    draw_blended = false,
 
-    stippled_borders = 2,
-    update_interval = 1.0,
-    uppercase = false, -- set to yes if you want all text to be in uppercase
-    use_spacer = 'right',
+    update_interval = 5.0,
 
 }
 conky.text = [[
-${voffset -6}${color1}${font :size=8:bold}BATTERY INFO ${hr 2}${font}
+${voffset -6}${font :size=8:bold}BATTERY INFO ${hr 2}${font}
 Vendor.Model: ${execi 6000 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'vendor' | awk '{$1=""; print $0;}'}.${execi 6000 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'model' | awk '{$1=""; print $0;}'}, Tech: ${execi 6000 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'technology' | awk '{$1=""; print $0;}'} (${execi 6000 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'energy-full-design' | awk '{$1=""; print $0;}'})
 ${battery_bar}
-${color3}Status:${battery} (${execi 2 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'energy:' | awk '{ print $2;}'}/${execi 2 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'energy-full:' | awk '{$1=""; print $0;}'})${alignr}Time left:${battery_time}
+Status:${battery} (${execi 2 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'energy:' | awk '{ print $2;}'}/${execi 2 upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep 'energy-full:' | awk '{$1=""; print $0;}'})${alignr}Time left:${battery_time}
 #--------------------+
 ]]

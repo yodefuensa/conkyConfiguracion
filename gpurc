@@ -1,49 +1,42 @@
 conky.config = {
-    alignment = 'top_right',
+    
+    -- Run settings
+    update_interval = 1.0,
     background = false,
-    border_width = 6,
-    default_color = '#F1F1F2',
-    color1 = '#F1F1F2',
-    color2 = '#E80808',
-    double_buffer = true,
-    draw_borders = false,
-    draw_outline = false, -- amplifies text if yes
-    draw_shades = true,
-    font = 'Ubuntu Mono:normal:size=9',
-    gap_x = 10,
-    gap_y = 475,
-    maximum_width  = 450,
-    minimum_width  = 450,
-    no_buffers = true,
 
+
+    -- Positioning
+    alignment = 'top_right',
+    gap_x = 10,
+    gap_y = 530,
+    maximum_width = 450,
+    minimum_width = 450,
+
+    -- Draw settings
+    draw_shades = true,
+    double_buffer = true,
+    no_buffers = true,
+    
+    -- Compositor settings
     own_window = true,
     own_window_type = 'desktop',
     own_window_transparent = true,
     own_window_argb_visual = true,
-    --own_window_argb_value = 255,
+    own_window_argb_value = 255,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-    draw_blended = false,
-
-    stippled_borders = 2,
-    update_interval = 1.0,
-    uppercase = false, -- set to yes if you want all text to be in uppercase
-    use_spacer = 'right',
+    
+    -- Text settings
+    font = 'Ubuntu Mono:normal:size=9',
     use_xft = true,
-
+    default_color = '#F1F1F2',
 }
 conky.text = [[
 
 ${voffset 2}${color1}${font :size=8:bold}GPU INFO ${hr 2}${font}
 ${color1}Graphics cards:
 ${execi 6000 hwinfo --gfxcard | grep "Model"}
-${voffset 2}${color1}MORE INFO ON Intel® GPU ${stippled_hr 1 1}
 Driver: ${execi 6000 glxinfo | grep "OpenGL version" |cut -c52-70}
-${voffset 2}${color1}MORE INFO ON NVIDIA GPU ${stippled_hr 1 1}
-${color1}Driver:${execi 6000 nvidia-smi --query-gpu=driver_version --format=csv,noheader,nounits}${goto 140}${color1}Utilization: ${execi 2 nvidia-smi -i 0 | grep % | awk '{print $13}'}${goto 290}${color1}Frequency: ${nvidia gpufreq}
-${color1}Temp: ${nvidia temp}°C
-${color1}VRAM Usage:$alignr${execi 2 nvidia-smi -i 0 | grep % | awk '{print $9$10$11}'}
-${voffset 2}${color1}PROCESSES USING NVIDIA GPU ${stippled_hr 1 1}
-${color1}Name - VRAM Usage
-${color2}${execi 2 nvidia-smi -i 0 | sed -n '19,$p' | sed '$ d'| awk '{print $7" - "$8}'|head -n 2}
+Frequency: ${execi 5 cat /sys/class/drm/card1/gt_cur_freq_mhz} MHz / ${execi 5 cat /sys/class/drm/card1/gt_max_freq_mhz}
+
 
 ]];

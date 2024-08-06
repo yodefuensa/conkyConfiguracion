@@ -1,47 +1,45 @@
 conky.config = {
-    alignment = 'top_left',
+    -- Run settings
+    update_interval = 2.0,
     background = false,
-    border_width = 6,
-    default_color = '#F1F1F2',
-    color1 = '#F1F1F2',
-    double_buffer = true,
-    draw_borders = false,
-    draw_outline = false, -- amplifies text if yes
-    draw_shades = true,
-    font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1050,
-    gap_y = 640,
-    maximum_width  = 450,
-    minimum_width  = 450,
-    no_buffers = true,
 
+    -- Positioning
+    alignment = 'top_right',
+    gap_x = 10,
+    gap_y = 625,
+    maximum_width = 450,
+    minimum_width = 450,
+
+    -- Draw settings
+    draw_shades = true,
+    double_buffer = true,
+    no_buffers = true,
+    
+    -- Compositor settings
     own_window = true,
     own_window_type = 'desktop',
     own_window_transparent = true,
     own_window_argb_visual = true,
     own_window_argb_value = 255,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-    draw_blended = false,
-
-    stippled_borders = 2,
-    update_interval = 1.0,
-    uppercase = false, -- set to yes if you want all text to be in uppercase
-    use_spacer = 'right',
+    
+    -- Text settings
+    font = 'Ubuntu Mono:normal:size=9',
     use_xft = true,
+    default_color = '#F1F1F2',
 }
 
 conky.text = [[
+${voffset 2}${color1}${font Ubuntu:bold:size=9}HDD INFO ${hr 2}${font}
+${color1}DISKS AND PARTITIONS ${hr 1}
+Name, Size, Type, Mountpoint
+${execi 3600 lsblk | egrep 'disk|part' | awk '{print "- " $1 ", " $4 ", " $6 ", " $7}'}
 
-${voffset 2}${color1}${font :size=8:bold}HDD INFO ${hr 2}${font}
-DISKS AND PARTITIONS ${stippled_hr 1 1}
-Name, Size, Type, Mountpoint 
-${execi 6000 lsblk | egrep 'disk|part' | awk '{print "- " $1 ", " $4 ", " $6 ", " $7}'}
-# DISK USAGE STATS
-${voffset 2}${color1}DISK USAGE STATS ${stippled_hr 1 1}
-/sdb3 ${if_mounted /}${goto 130}( ${fs_used /} / ${fs_size /} )${goto 280}${fs_bar 6 /}${else}${goto 110}Not Mounted${endif}
-#/sda1 ${if_mounted /media/jaime}${goto 130}( ${fs_used /media/jaime} / ${fs_size /media/jaime} )${goto 280}${fs_bar 6 /media/jaime}${else}${goto 110}Not Mounted${endif}    
-Read: ${color3}${diskio_read}${goto 200}Write:${goto 250}${diskio_write}
+${voffset 2}${color1}${font Ubuntu:bold:size=9}DISK USAGE STATS ${hr 2}${font}
+/dev/nvme0n1p1 ${if_mounted /}${goto 130}( ${fs_used /} / ${fs_size /} )${goto 280}${fs_bar 6 /}${else}${goto 110}Not Mounted${endif}
+/dev/nvme0n1p2 ${if_mounted /home}${goto 130}( ${fs_used /home} / ${fs_size /home} )${goto 280}${fs_bar 6 /home}${else}${goto 110}Not Mounted${endif}
+Read: ${diskio_read} ${goto 200}Write: ${goto 250}${diskio_write}
 ${diskiograph_read 20,220} ${alignr}${diskiograph_write 20,220}
-
 ]];
+
 

@@ -29,6 +29,11 @@ It is usually a fairly generic configuration and I am inspired by many others
 https://github.com/dm2912/conky
 https://github.com/Frequential/conky-configuration
 https://github.com/ZvonimirKucis/conky
+https://github.com/Kosteron/Conky
+https://www.reddit.com/r/Conkyporn/comments/kd1r2f/my_conky_configuration_for_ubuntu/
+https://www.reddit.com/r/Conkyporn/comments/w17sb5/conky_theme/
+https://dai-trying.com/tutorials/building-a-conky-part-3-disks/
+https://www.reddit.com/r/Conkyporn/comments/1b30rp2/my_conky_setup_for_monitoring_my_inteldual_amd/
 
 Here we have how to make the colors of the temperature dynamic, I have the impression that it fails from 100ºC but it is better not to get there
 https://www.youtube.com/watch?v=ItZAMXO-FIA

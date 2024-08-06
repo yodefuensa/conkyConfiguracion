@@ -1,52 +1,50 @@
 conky.config = {
-    alignment = 'top_left',
-    background = false,
-    border_width = 6,
-    default_color = '#F1F1F2',
-    color1 = '#F1F1F2', --white
-    color2 = '#E80808', --red
-    color3 = '#00d52a', --green
-    color4 = '#eee100', --yellow
-    double_buffer = true,
-    draw_borders = false,
-    draw_outline = false, -- amplifies text if yes
-    draw_shades = true,
-    font = 'Ubuntu Mono:normal:size=9',
-    gap_x = -1050,
-    gap_y = -70,
-    maximum_width  = 450,
-    minimum_width  = 450,
-    no_buffers = true,
 
+    -- Run settings
+    update_interval = 1.0,
+    background = false,
+    cpu_avg_samples = 1,
+
+    -- Positioning
+    alignment = 'top_right',
+    gap_x = 10,
+    gap_y = 100,
+    maximum_width = 450,
+    minimum_width = 450,
+
+    -- Draw settings
+    draw_shades = true,
+    double_buffer = true,
+    no_buffers = true,
+    
+    -- Compositor settings
     own_window = true,
     own_window_type = 'desktop',
     own_window_transparent = true,
     own_window_argb_visual = true,
     own_window_argb_value = 255,
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-    draw_blended = false,
-
-    stippled_borders = 2,
-    update_interval = 1.0,
-    uppercase = false, -- set to yes if you want all text to be in uppercase
-    use_spacer = 'right',
+    
+    -- Text settings
+    font = 'Ubuntu Mono:normal:size=9',
     use_xft = true,
-
+    default_color = '#F1F1F2',
 }
 
 conky.text = [[
-${color1}${font Sans:bold:size=9}CPU ${hr 2}$color1$font
-${execi 86400 cat /proc/cpuinfo | grep 'model name' | uniq | sed 's/model name\t: //'} ${goto 270} Average cpu usage: ${cpu cpu0}%
-${cpugraph 000000 FF6347  -t 100}
-${goto 50}$color1 Core 0 Temp: ${exec sensors|grep 'Tctl'|cut -c16-17}
-#${if_match "${exec sensors|grep 'Tctl'|cut -c16-17}" <="50"}$color3 ${else} $color4 ${if_match "${exec sensors|grep 'Tctl'|cut -c16-17}" >="75"}$color2 ${endif} ${endif} ${exec sensors|grep 'Tctl'|awk '{print $3}'}
-${color1}0:${goto 35}${freq_g 0}GHz${goto 90}${cpu cpu0}%${goto 125}${cpubar cpu0 10, 100}${goto 240}${color1} 1:${goto 270}${freq_g 2}GHz${goto 320}${cpu cpu1}%${goto 350}${cpubar cpu1 10, 100}
-${color1}2:${goto 35}${freq_g 2}GHz${goto 90}${cpu cpu2}%${goto 125}${cpubar cpu2 10, 100}${goto 240}${color1} 3:${goto 270}${freq_g 3}GHz${goto 320}${cpu cpu3}%${goto 350}${cpubar cpu3 10, 100}
-${color1}4:${goto 35}${freq_g 4}GHz${goto 90}${cpu cpu4}%${goto 125}${cpubar cpu4 10, 100}${goto 240}${color1} 5:${goto 270}${freq_g 5}GHz${goto 320}${cpu cpu5}%${goto 350}${cpubar cpu5 10, 100}
-${color1}6:${goto 35}${freq_g 6}GHz${goto 90}${cpu cpu6}%${goto 125}${cpubar cpu7 10, 100}${goto 240}${color1} 7:${goto 270}${freq_g 7}GHz${goto 320}${cpu cpu7}%${goto 350}${cpubar cpu7 10, 100}
-${color1}8:${goto 35}${freq_g 8}GHz${goto 90}${cpu cpu8}%${goto 125}${cpubar cpu8 10, 100}${goto 240}${color1} 9:${goto 270}${freq_g 9}GHz${goto 320}${cpu cpu9}%${goto 350}${cpubar cpu9 10, 100}
-${color1}10:${goto 35}${freq_g 10}GHz${goto 90}${cpu cpu10}%${goto 125}${cpubar cpu10 10, 100}${goto 240}${color1} 11:${goto 270}${freq_g 11}GHz${goto 320}${cpu cpu11}%${goto 350}${cpubar cpu11 10, 100}
+${font Sans:bold:size=9}CPU ${hr 2}$font
+${execi 86400 awk -F: '/model name/ {gsub(/^ +| +$/, "", $2); print $2; exit}' /proc/cpuinfo} ${goto 270}Average CPU usage: ${cpu cpu0}%
+${cpugraph ffffff ffffff -t 100}
+${goto 50} Core 0 Temp: ${exec sensors | awk '/CPU/ {print $2}' | cut -c2-3}
+Cores Frequency and Usage:
+0:${goto 35}${freq_g 0}GHz${goto 90}${cpu cpu0}%${goto 125}${cpubar cpu0 10,100}${goto 240}1:${goto 270}${freq_g 1}GHz${goto 320}${cpu cpu1}%${goto 350}${cpubar cpu1 10,100}
+2:${goto 35}${freq_g 2}GHz${goto 90}${cpu cpu2}%${goto 125}${cpubar cpu2 10,100}${goto 240}3:${goto 270}${freq_g 3}GHz${goto 320}${cpu cpu3}%${goto 350}${cpubar cpu3 10,100}
+4:${goto 35}${freq_g 4}GHz${goto 90}${cpu cpu4}%${goto 125}${cpubar cpu4 10,100}${goto 240}5:${goto 270}${freq_g 5}GHz${goto 320}${cpu cpu5}%${goto 350}${cpubar cpu5 10,100}
+6:${goto 35}${freq_g 6}GHz${goto 90}${cpu cpu6}%${goto 125}${cpubar cpu6 10,100}${goto 240}7:${goto 270}${freq_g 7}GHz${goto 320}${cpu cpu7}%${goto 350}${cpubar cpu7 10,100}
 
-
-
-]];
+${font Sans:bold:size=9}CPU Details ${hr 2}$color$font
+Number of Cores: ${execi 86400 nproc}${alignr}CPU Frequency: ${freq_g}GHz
+Load Average (1 min): ${loadavg 1} ${alignr}Load Average (5 min): ${loadavg 2}
+Load Average (15 min): ${loadavg 3} ${alignr}Processes: ${processes}
+Running Processes: ${running_processes}
+]]

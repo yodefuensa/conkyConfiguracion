@@ -5,11 +5,11 @@ conky.config = {
 
     -- Positioning
     alignment = 'top_left',
-    gap_x = -1050,
-    gap_y = 1300,
+    gap_x = 10,
+    gap_y = 850,
     minimum_width = 1200,
     maximum_width = 1200,
-    -- minimum_height = 200,
+    
 
     -- Draw settings
     double_buffer = true,
@@ -25,9 +25,9 @@ conky.config = {
     own_window_type = 'dock',
 
     -- Text settings
-    uppercase = true,
     use_xft = true,
-    override_utf8_locale = true
+    override_utf8_locale = true,
+    draw_shades = true,
 };
 
 conky.text = [[

@@ -30,6 +30,13 @@ Por lo general es una configuración bastante generica y me inspire en otras muc
 https://github.com/dm2912/conky
 https://github.com/Frequential/conky-configuration
 https://github.com/ZvonimirKucis/conky
+https://github.com/Kosteron/Conky
+https://www.reddit.com/r/Conkyporn/comments/kd1r2f/my_conky_configuration_for_ubuntu/
+https://www.reddit.com/r/Conkyporn/comments/w17sb5/conky_theme/
+https://dai-trying.com/tutorials/building-a-conky-part-3-disks/
+https://www.reddit.com/r/Conkyporn/comments/1b30rp2/my_conky_setup_for_monitoring_my_inteldual_amd/
+
+and Logansfury por la ayuda con los graficos
 
 Aquí tenemos como hacer dinámico los colores de la temperatura, tengo la impresión de que falla a partir de los 100ºC pero mejor no llegar ahí
 https://www.youtube.com/watch?v=ItZAMXO-FIA
@@ -37,3 +44,8 @@ https://www.youtube.com/watch?v=ItZAMXO-FIA
 la infromación de spotify la saque de: 
 https://github.com/Rayzr522/now-clocking
 autoría total de @gamehelp16 and @Rayzr522, yo solo le quite las opciones, de otros reporductores lo simplifique a un script. para ver los otros reproductores dipsonibles lo teneis en su github
+
+
+and the wallpaper:
+
+https://www.artstation.com/kuvshinov_ilya
